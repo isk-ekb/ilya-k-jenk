@@ -1,5 +1,7 @@
 pipeline {
     agent any
+    parameters {
+        string defaultValue: 'IlyaK', name: 'STUDENT_NAME'
     stages {
         stage('start') {
             steps {
@@ -7,7 +9,7 @@ pipeline {
                 sh 'pip install -r requirements.txt'
                 sh 'chmod u+x hello.py'
                 sh 'touch result.txt'
-                sh 'python3 hello.py -n IlyaK > result.txt'
+                sh 'python3 hello.py --n ${params.STUDENT_NAME} > result.txt'
             }
         }
         stage('save-result') {
